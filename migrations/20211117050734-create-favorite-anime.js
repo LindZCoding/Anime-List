@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       synopsis: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1500)
       },
       episodes: {
         type: Sequelize.STRING

@@ -7,6 +7,7 @@ const passport = require('./config/ppConfig')
 const flash = require('connect-flash')
 const isLoggedIn = require('./middleware/isLoggedIn')
 const axios = require('axios')
+const db = require("./models")
 
 
 
@@ -45,6 +46,7 @@ app.use((req, res, next) => {
 // controllers middleware 
 app.use('/auth', require('./controllers/auth'))
 app.use('/anime', require('./controllers/anime'))
+app.use('/faves', require('./controllers/faveAnime'))
 
 
 
@@ -60,7 +62,14 @@ app.get('/', (req, res)=>{
 
 // profile route
 app.get('/profile', isLoggedIn, (req, res)=>{
-    res.render('profile')
+    db.favoriteAnime.findAll()
+    .then(faves => {
+        console.log(faves)
+        res.render("profile", {results: faves})
+    })
+    .catch(error => {
+        console.log(error)
+    })
 })
 
 // anime route

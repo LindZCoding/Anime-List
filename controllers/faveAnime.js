@@ -6,7 +6,8 @@ const db = require("../models")
 router.get("/", (req, res) => {
     db.favoriteAnime.findAll()
     .then(faves => {
-        res.render("results", {results: faves})
+        console.log(faves)
+        res.render("profile", {results: faves})
     })
     .catch(error => {
         console.log(error)
@@ -22,16 +23,23 @@ router.post("/addFave", (req, res) => {
     const data = JSON.parse(JSON.stringify(req.body))
     console.log("this is anime data", data)
     db.favoriteAnime.create({
-        name: data.title_english,
-        imdbId: data.imdbId
+        name: data.title,
+        animeId: data.animeId,
+        userId: res.locals.currentUser.id,
+        synopsis: data.synopsis,
+        image: data.image_url,
+        episodes: data.episodes,
+        score: data.score
     })
     .then(createdFave => {
-        console.log("db instance created: \n", createdFave)
-        res.redirect(`/faves/${createdFave.id}`)
+        res.redirect('/faves/')
     })
     .catch(error => {
         console.log(error)
         //can also use console.error
+    })
+    .finally(created => {
+        console.log(created)
     })
 
 })
@@ -39,30 +47,33 @@ router.post("/addFave", (req, res) => {
 
 
 //we are going to add a delete, that will allow us to remove a fave
-router.delete("/:id", (req, res) => {
-    // console.log("this is the id\n", req.params.id)
-    db.favorite.destroy({
-        where: { id: req.params.id }
-    })
-    .then(deletedItem => {
-        // Destroy returns "1" if smting is deleted and "0" is nothing deleted
-        // console.log("you deleted: ", deletedItem)
-        res.redirect("/faves")
-    })
-    .catch(error => {
-        console.error
-    })
-})
+// router.delete("/:id", (req, res) => {
+//     // console.log("this is the id\n", req.params.id)
+//     db.favorite.destroy({
+//         where: { id: req.params.id }
+//     })
+//     .then(deletedItem => {
+//         // Destroy returns "1" if smting is deleted and "0" is nothing deleted
+//         // console.log("you deleted: ", deletedItem)
+//         res.redirect("/faves")
+//     })
+//     .catch(error => {
+//         console.error
+//     })
+// })
 
 //time permitting, a show route for an individual fave
 
-router.get("/:id", (req, res) => {
-    console.log("this is the fave id\n", req.params.id)
-    db.favorite.findOne({
-        where: { id: req.params.id }
+router.get("/:mal_id", (req, res) => {
+    // console.log(res)
+    console.log("this is the fave id\n", req.params.mal_id)
+    db.favoriteAnime.findOne({
+        where: { mal_id: req.params.mal_id }
     })
     .then(foundFave => {
-        res.render("faveDetail", { title: foundFave.title, imdbId: foundFave.imdbId, date: foundFave.createdAt})
+        res.render("faveAnimeDetail", { name: foundFave.name,
+             animeId: foundFave.animeId, synopsis: foundFave.synopsis, image: foundFave.image, 
+            userId: foundFave.userId, episodes: foundFave.episodes, score: foundFave.score})
     })
     .catch(error => {
         console.error

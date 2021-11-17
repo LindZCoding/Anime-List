@@ -7,6 +7,7 @@
 
 <h1>
     <%= title_english %>
+    <%= title %>
 </h1>
 
 <h4>
@@ -21,6 +22,13 @@
 
 </div>
 
-<form method="POST" action="/profile">
+<form method="POST" action="/faves/addFave">
+    <input hidden type="text" name="animeId" value="<%= animeId %>" >
+    <input hidden type="text" name="title_english" value="<%= title_english %>" >
+    <input hidden type="text" name="title" value="<%= title %>" >
+    <input hidden type="text" name="image_url" value="<%= image_url %>" >
+    <input hidden type="text" name="episodes" value="<%= episodes %>" >
+    <input hidden type="text" name="score" value="<%= score %>" >
+    <input hidden type="text" name="synopsis" value="<%= synopsis %>" >
     <button type="submit">Add to your profile</button>
 </form>

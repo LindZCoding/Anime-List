@@ -20,15 +20,16 @@ router.get('/:mal_id', (req, res) => {
     console.log("this is the MAL ID:", animeSearched)
     axios.get(`https://api.jikan.moe/v3/anime/${animeSearched}/`)
     .then(idResults => {
-        console.log("this is APIDATA:", idResults.data)
+        // console.log("this is single APIDATA:", idResults.data)
         let animeId = req.params.mal_id
+        let title = idResults.data.title
         let title_english = idResults.data.title_english
         let synopsis = idResults.data.synopsis
         let image_url = idResults.data.image_url
         let episodes = idResults.data.episodes
         let score = idResults.data.score
 
-        res.render('animeDetail', {title_english: title_english, synopsis: synopsis, image_url: image_url, episodes: episodes, score: score})
+        res.render('animeDetail', {title_english: title_english, title: title, synopsis: synopsis, image_url: image_url, episodes: episodes, score: score, animeId: animeId})
     })
 })
 

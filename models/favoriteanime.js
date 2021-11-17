@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     animeId: DataTypes.INTEGER,
     userId: DataTypes.INTEGER,
     image: DataTypes.STRING,
-    synopsis: DataTypes.STRING,
+    synopsis: DataTypes.STRING(1500),
     episodes: DataTypes.STRING,
     score: DataTypes.STRING
   }, {

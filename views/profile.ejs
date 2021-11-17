@@ -1,1 +1,16 @@
 <h2><%= currentUser.name %>'s Profile</h2>
+
+<%if(results === undefined) {%>
+    <h3>No Favorites Found</h3>
+    <small>No favorite found, please try again</small>
+<%} else {%>
+    <ul>
+        <%results.forEach(function(result) {%>
+            <li>
+                <a href="/anime/<%=result.animeId%>">
+                    <%=result.name%>
+                </a>
+            </li>
+            <%})%>
+    </ul>
+<%}%>
