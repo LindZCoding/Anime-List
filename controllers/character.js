@@ -26,12 +26,13 @@ router.get('/:mal_id', (req, res) => {
         let image_url = idResults.data.image_url
         let about = idResults.data.about
         let nicknames = idResults.data.nicknames[0]
-        let voice_actors = idResults.data.voice_actors[0].name
-        let animeName = idResults.data.animeography[0].name
-        let voiceActorImage = idResults.data.voice_actors[0].image_url
-
+        let voice_actors = idResults.data.voice_actors.length > 0 ? idResults.data.voice_actors : undefined
+        console.log("voice actors:", voice_actors)
+        let animeName = idResults.data.animeography.length > 0 ? idResults.data.animeography[0].name : ""
+        // let voiceActorImage = idResults.data.voice_actors.length > 0 ? idResults.data.voice_actors[0].image_url : undefined
+        
         res.render('characterDetail', {name: name, image_url: image_url, about: about, 
-            nicknames: nicknames, voice_actors: voice_actors, animeName: animeName, voiceActorImage: voiceActorImage})
+            nicknames: nicknames, animeName: animeName, voice_actors: voice_actors})
     })
 })
 

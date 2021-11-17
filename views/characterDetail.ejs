@@ -1,32 +1,70 @@
-<div>
-    <div class="card" style="width: 18rem;">
-        <img width="200" height="300" src="<%= image_url %>" class="card-img-top" alt="character image">
+<%if(image_url === undefined) {%>
+    <h3></h3>
+<%} else {%>
+    <div>
+        <div class="card" style="width: 18rem;">
+            <img width="200" height="300" src="<%= image_url %>" class="card-img-top" alt="character image">
         </div>
+<%}%>
 
 
-<h1>
-    <%= name %>
-</h1>
+<%if(name===undefined) {%>
+    <h1>No name</h1>
+    <%} else {%>
+        <h1>
+            <%= name %>
+        </h1>
+        <%}%>
 
-<h2>
-    <%= nicknames %>
-</h2>
+<%if(nicknames === undefined) {%>
+    <h2></h2>
+<%} else {%>
+    <h2>
+        <%= nicknames %>
+    </h2>
+<%}%>
 
-<h3>
-   Anime: <%= animeName %>
-</h3>
+<%if(animeName === undefined) {%>
+    <h3></h3>
+<%} else {%>
+    <h3>
+        <%= animeName %>
+    </h3>
+<%}%>
 
-<h4>
-    About: <%= about %>
-</h4>
+<%if(about === undefined) {%>
+    <h3></h3>
+<%} else {%>
+    <h3>
+      About:  <%= about %>
+    </h3>
+<%}%>
 
-<h5>
-    Voice actor: <%= voice_actors %>
-</h5>
 
-<h6>   
-   <img width="50" height="80" src="<%= voiceActorImage %>" class="card-img-top" alt="voice actor image"> 
-</h6>
+<%if(voice_actors === undefined) {%>
+    
+<%} else {%>
+    <%voice_actors.forEach(function(voiceActor) {%>
+        <img width="100" height="150" src="<%= voiceActor.image_url %>" class="card-img-top" alt="voice actor image"> <br>
+        <h4>
+            Voice actor: <%= voiceActor.name %>
+        </h4> 
+            Language: <%= voiceActor.language %> 
+                <br> <br>
+        <%})%>
+
+<%}%>
 
 </div>
+
+
+
+
+
+
+
+
+
+
+
 
