@@ -46,6 +46,7 @@ app.use((req, res, next) => {
 // controllers middleware 
 app.use('/auth', require('./controllers/auth'))
 app.use('/anime', require('./controllers/anime'))
+app.use('/character', require('./controllers/character'))
 app.use('/faves', require('./controllers/faveAnime'))
 
 
@@ -75,6 +76,10 @@ app.get('/profile', isLoggedIn, (req, res)=>{
 // anime route
 app.get('/anime', (req,res) => {
     res.render('anime')
+})
+
+app.get('/character', (req, res) => {
+    res.render('character')
 })
 
 

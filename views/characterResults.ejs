@@ -1,0 +1,14 @@
+<%if(characterResults === undefined) {%>
+    <h3>No Characters Found</h3>
+    <small>No character found, please try again</small>
+<%} else {%>
+    <ul>
+        <%characterResults.forEach(function(result) {%>
+            <li>
+                <a href="/character/<%=result.mal_id%>">
+                    <%=result.name%>
+                </a>
+            </li>
+            <%})%>
+    </ul>
+<%}%>

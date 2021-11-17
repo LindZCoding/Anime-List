@@ -6,7 +6,7 @@ router.get('/results', (req, res)=>{
     let animeSearch = req.query.animeSearch
     axios.get(`https://api.jikan.moe/v3/search/anime?q=${animeSearch}`)
     .then(apiData => {
-        console.log("this is APIDATA:", apiData.data.results)
+        // console.log("this is APIDATA:", apiData.data.results)
         let animeResults = apiData.data.results
         res.render('results', {results: animeResults})
     })
@@ -17,7 +17,7 @@ router.get('/results', (req, res)=>{
 
 router.get('/:mal_id', (req, res) => {
     let animeSearched = req.params.mal_id
-    console.log("this is the MAL ID:", animeSearched)
+    // console.log("this is the MAL ID:", animeSearched)
     axios.get(`https://api.jikan.moe/v3/anime/${animeSearched}/`)
     .then(idResults => {
         // console.log("this is single APIDATA:", idResults.data)
