@@ -48,6 +48,7 @@ app.use('/auth', require('./controllers/auth'))
 app.use('/anime', require('./controllers/anime'))
 app.use('/character', require('./controllers/character'))
 app.use('/faves', require('./controllers/faveAnime'))
+app.use('/characterFaves', require('./controllers/faveCharacter'))
 
 
 
@@ -67,6 +68,17 @@ app.get('/profile', isLoggedIn, (req, res)=>{
     .then(faves => {
         console.log(faves)
         res.render("profile", {results: faves})
+    })
+    .catch(error => {
+        console.log(error)
+    })
+})
+
+app.get('/profile', (req, res) => {
+    db.favoriteCharacter.findAll()
+    .then(charFaves => {
+        console.log(charFaves)
+        res.render("profile", {characterResults: charFaves})
     })
     .catch(error => {
         console.log(error)
