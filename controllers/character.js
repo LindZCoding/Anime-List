@@ -28,9 +28,10 @@ router.get('/:mal_id', (req, res) => {
         let nicknames = idResults.data.nicknames[0]
         let voice_actors = idResults.data.voice_actors[0].name
         let animeName = idResults.data.animeography[0].name
+        let voiceActorImage = idResults.data.voice_actors[0].image_url
 
         res.render('characterDetail', {name: name, image_url: image_url, about: about, 
-            nicknames: nicknames, voice_actors: voice_actors, animeName: animeName})
+            nicknames: nicknames, voice_actors: voice_actors, animeName: animeName, voiceActorImage: voiceActorImage})
     })
 })
 
