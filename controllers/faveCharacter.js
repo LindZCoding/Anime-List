@@ -47,25 +47,6 @@ router.post("/addCharacterFave", (req, res) => {
 })
 
 
-
-//we are going to add a delete, that will allow us to remove a fave
-// router.delete("/:id", (req, res) => {
-//     // console.log("this is the id\n", req.params.id)
-//     db.favorite.destroy({
-//         where: { id: req.params.id }
-//     })
-//     .then(deletedItem => {
-//         // Destroy returns "1" if smting is deleted and "0" is nothing deleted
-//         // console.log("you deleted: ", deletedItem)
-//         res.redirect("/faves")
-//     })
-//     .catch(error => {
-//         console.error
-//     })
-// })
-
-//time permitting, a show route for an individual fave
-
 router.get("/:mal_id", (req, res) => {
     // console.log(res)
     console.log("this is the char fave id\n", req.params.mal_id)

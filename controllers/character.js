@@ -25,7 +25,7 @@ router.get('/:mal_id', (req, res) => {
         let name = idResults.data.name
         let image_url = idResults.data.image_url
         let about = idResults.data.about
-        let nicknames = idResults.data.nicknames.length > 0 ? idResults.data.nicknames.join(", ") : "no nicknames found"
+        let nicknames = idResults.data.nicknames.length > 0 ? idResults.data.nicknames.join(", ") : ""
         let voice_actors = idResults.data.voice_actors.length > 0 ? idResults.data.voice_actors : undefined
         // console.log("voice actors:", voice_actors)
         let animeName = idResults.data.animeography.length > 0 ? idResults.data.animeography[0].name : ""

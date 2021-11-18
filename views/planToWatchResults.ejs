@@ -1,0 +1,14 @@
+<%if(planToWatchResults === undefined) {%>
+    <h3>No Animes Found</h3>
+    <small>No anime found, please try again</small>
+<%} else {%>
+    <ul>
+        <%planToWatchResults.forEach(function(result) {%>
+            <li>
+                <a href="/planToWatch/<%=result.mal_id%>">
+                    <%=result.title%>
+                </a>
+            </li>
+            <%})%>
+    </ul>
+<%}%>

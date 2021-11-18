@@ -51,6 +51,8 @@ app.use('/character', require('./controllers/character'))
 app.use('/faves', require('./controllers/faveAnime'))
 app.use('/characterFaves', require('./controllers/faveCharacter'))
 app.use('/aboutMe', require('./controllers/aboutMe'))
+app.use('/planToWatch', require('./controllers/planToWatch'))
+app.use('/planToWatchFave', require('./controllers/planToWatchFave'))
 
 
 
@@ -67,14 +69,14 @@ app.get('/', (req, res) => {
 // profile route
 app.get('/profile', isLoggedIn, async (req, res) => {
     res.locals.currentUser = req.user;
-    console.log("this should be req user", req.user)
+    // console.log("this should be req user", req.user)
     db.aboutMe.findOne({
         where: {
             userId: res.locals.currentUser.id
         }
     })
     .then(aboutMeText => {
-        console.log("ABOUT ME TEXT:", aboutMeText)
+        // console.log("ABOUT ME TEXT:", aboutMeText)
         db.favoriteAnime.findAll({
             where: {
                 userId: res.locals.currentUser.id
@@ -88,8 +90,15 @@ app.get('/profile', isLoggedIn, async (req, res) => {
                     }
                 })
                     .then(charFaves => {
-                        console.log(charFaves)
-                        res.render("profile", { characterResults: charFaves, results: faves, aboutMe: aboutMeText?.personalText || "" })
+                        // console.log(charFaves)
+                        db.planToWatch.findAll({
+                            where: {
+                                userId: res.locals.currentUser.id
+                            }
+                        })
+                        .then(planFaves => {
+                            res.render("profile", { characterResults: charFaves, results: faves, planToWatchResults: planFaves, aboutMe: aboutMeText?.personalText || "" })
+                        })
                     })
             })
             .catch(error => {
@@ -106,6 +115,10 @@ app.get('/anime', (req, res) => {
 
 app.get('/character', (req, res) => {
     res.render('character')
+})
+
+app.get('/planToWatch', (req, res) => {
+    res,render('planToWatch')
 })
 
 

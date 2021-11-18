@@ -73,6 +73,18 @@ router.post("/:deleteType/:mal_id", (req, res) => {
         .catch(error => {
             console.error
         })
+    } else if(req.params.deleteType === "planToWatch"){
+        db.planToWatch.destroy({
+            where: { animeId: req.params.mal_id }
+        })
+        .then(deletedItem => {
+            // Destroy returns "1" if smting is deleted and "0" if nothing deleted
+            console.log("you deleted: ", deletedItem)
+            res.redirect("/profile")
+        })
+        .catch(error => {
+            console.error
+        })
     }
     
 })

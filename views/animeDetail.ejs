@@ -7,8 +7,33 @@
 
 <h1>
     <%= title_english %>
+</h1>
+<h1>
     <%= title %>
 </h1>
+
+<form method="POST" action="/faves/addFave">
+    <input hidden type="text" name="animeId" value="<%= animeId %>" >
+    <input hidden type="text" name="title_english" value="<%= title_english %>" >
+    <input hidden type="text" name="title" value="<%= title %>" >
+    <input hidden type="text" name="image_url" value="<%= image_url %>" >
+    <input hidden type="text" name="episodes" value="<%= episodes %>" >
+    <input hidden type="text" name="score" value="<%= score %>" >
+    <input hidden type="text" name="synopsis" value="<%= synopsis %>" >
+    <button type="submit">Add to favorites</button>
+</form>
+
+<form method="POST" action="/planToWatchFave/addPlanToWatchFave">
+    <input hidden type="text" name="animeId" value="<%= animeId %>" >
+    <input hidden type="text" name="title_english" value="<%= title_english %>" >
+    <input hidden type="text" name="title" value="<%= title %>" >
+    <input hidden type="text" name="image_url" value="<%= image_url %>" >
+    <input hidden type="text" name="episodes" value="<%= episodes %>" >
+    <input hidden type="text" name="score" value="<%= score %>" >
+    <input hidden type="text" name="synopsis" value="<%= synopsis %>" >
+    <button type="submit">Add to plan to watch</button>
+</form>
+
 
 <h4>
     Episodes in anime: <%= episodes %>   
@@ -22,16 +47,7 @@
 
 </div>
 
-<form method="POST" action="/faves/addFave">
-    <input hidden type="text" name="animeId" value="<%= animeId %>" >
-    <input hidden type="text" name="title_english" value="<%= title_english %>" >
-    <input hidden type="text" name="title" value="<%= title %>" >
-    <input hidden type="text" name="image_url" value="<%= image_url %>" >
-    <input hidden type="text" name="episodes" value="<%= episodes %>" >
-    <input hidden type="text" name="score" value="<%= score %>" >
-    <input hidden type="text" name="synopsis" value="<%= synopsis %>" >
-    <button type="submit">Add to your profile</button>
-</form>
+
 
 
 

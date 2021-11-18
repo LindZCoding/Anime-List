@@ -25,7 +25,7 @@
                 </a>
             </li>
             <form action="/faves/anime/<%=result.animeId%>?_method=DELETE" method="POST">
-                <button type="submit">Remove from favorites</button>
+                <button type="submit">Remove</button>
             </form>
             <%})%>
     </ul>
@@ -46,8 +46,30 @@ Favorite Characters:
                 </a>
             </li>
             <form action="/faves/character/<%=result.mal_id%>?_method=DELETE" method="POST">
-                <button type="submit">Remove from favorites</button>
+                <button type="submit">Remove</button>
             </form>
             <%})%>
     </ul>
 <%}%>
+
+<h3>
+    Plan To Watch:
+</h3>
+
+<%if(planToWatchResults === undefined) {%>
+    <h3>No plan to watch made</h3>
+<%} else {%>
+    <ul>
+        <%planToWatchResults.forEach(function(result) {%>
+            <li>
+                <a href="/planToWatch/<%=result.animeId%>">
+                    <%=result.name%>
+                </a>
+            </li>
+            <form action="/faves/planToWatch/<%=result.animeId%>?_method=DELETE" method="POST">
+                <button type="submit">Remove</button>
+            </form>
+            <%})%>
+    </ul>
+<%}%> 
+<br> <br>
