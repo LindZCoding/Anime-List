@@ -58,6 +58,19 @@
 </div>
 
 
+<form method="POST" action="/characterFaves/addCharacterFave">
+    <input hidden type="text" name="mal_id" value="<%= mal_id %>" >
+    <input hidden type="text" name="name" value="<%= name %>" >
+    <input hidden type="text" name="animeName" value="<%= animeName %>" >
+    <input hidden type="text" name="image_url" value="<%= image_url %>" >
+    <input hidden type="text" name="voice_actors" value="<%= voice_actors %>" >
+    <input hidden type="text" name="nicknames" value="<%= nicknames %>" >
+    <input hidden type="text" name="about" value="<%= about %>" >
+    <button type="submit">Add to your profile</button>
+</form>
+
+
+
 
 
 

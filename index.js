@@ -14,12 +14,13 @@ const db = require("./models")
 
 
 
+
 // views (ejs and layouts) set up
 app.set('view engine', 'ejs')
 app.use(ejsLayouts)
 
 // body parser middelware
-app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({ extended: false }))
 
 // session middleware
 app.use(session({
@@ -54,39 +55,40 @@ app.use('/characterFaves', require('./controllers/faveCharacter'))
 
 
 // home route
-app.get('/', (req, res)=>{
+app.get('/', (req, res) => {
     axios.get("https://api.jikan.moe/v3/anime")
-    .then(res => console.log(res.data))
-    // .then(data => console.log(data))
-    .catch(err => console.error)
+        .then(res => console.log(res.data))
+        // .then(data => console.log(data))
+        .catch(err => console.error)
     res.render('home')
 })
 
 // profile route
-app.get('/profile', isLoggedIn, (req, res)=>{
-    db.favoriteAnime.findAll()
-    .then(faves => {
-        console.log(faves)
-        res.render("profile", {results: faves})
+app.get('/profile', isLoggedIn, (req, res) => {
+    db.favoriteAnime.findAll({
+        where: {
+            userId: res.locals.currentUser.id
+        }
     })
-    .catch(error => {
-        console.log(error)
-    })
-})
-
-app.get('/profile', (req, res) => {
-    db.favoriteCharacter.findAll()
-    .then(charFaves => {
-        console.log(charFaves)
-        res.render("profile", {characterResults: charFaves})
-    })
-    .catch(error => {
-        console.log(error)
-    })
+        .then(faves => {
+            console.log("faves!!!!!!!!!!!", faves)
+            db.favoriteCharacter.findAll({
+                where: {
+                    userId: res.locals.currentUser.id
+                }
+            })
+                .then(charFaves => {
+                    console.log(charFaves)
+                    res.render("profile", { characterResults: charFaves, results: faves })
+                })
+        })
+        .catch(error => {
+            console.log(error)
+        })
 })
 
 // anime route
-app.get('/anime', (req,res) => {
+app.get('/anime', (req, res) => {
     res.render('anime')
 })
 
@@ -96,7 +98,7 @@ app.get('/character', (req, res) => {
 
 
 
-app.listen(3000, ()=>{
+app.listen(3000, () => {
     console.log(`process.env.SUPER_SECRET_SECRET ${process.env.SUPER_SECRET_SECRET}`)
     console.log("auth_practice running on port 3000")
 })

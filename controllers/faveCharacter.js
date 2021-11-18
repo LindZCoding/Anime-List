@@ -28,12 +28,13 @@ router.post("/addCharacterFave", (req, res) => {
         userId: res.locals.currentUser.id,
         about: data.about,
         image_url: data.image_url,
-        voice_actors: data.voice_actors.length > 0 ? idResults.data.voice_actors : undefined
-        animeName: data.animeography.length > 0 ? idResults.data.animeography[0].name : ""
-        nicknames: data.nicknames[0]
+        voice_actors: data.voice_actors.length > 0 ? data.voice_actors : undefined,
+        animeName: data.animeName ? data.animeName : "No anime found",
+        nicknames: data.nicknames
     })
     .then(createdFave => {
-        res.redirect('/characterFaves/')
+        console.log("HELLO FAVE", createdFave)
+        res.redirect('/profile')
     })
     .catch(error => {
         console.log(error)
@@ -72,10 +73,10 @@ router.get("/:mal_id", (req, res) => {
         where: { mal_id: req.params.mal_id }
     })
     .then(foundCharFave => {
-        res.render("faveCharacterDetail", { name: foundCharFave.name,
+        res.render("faveCharacterDetail", { animeName: foundCharFave.animeName,
              mal_id: foundCharFave.mal_id, data: foundCharFave.data, image_url: foundCharFave.image_url, 
-            userId: foundCharFave.userId, animeName: foundCharFave.animeName, voice_actors: foundCharFave.voice_actors, 
-        nicknames: foundCharFave.nicknames})
+            userId: foundCharFave.userId, voice_actors: foundCharFave.voice_actors, 
+        nicknames: foundCharFave.nicknames, name: foundCharFave.name})
     })
     .catch(error => {
         console.error

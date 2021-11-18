@@ -1,6 +1,6 @@
 <h2><%= currentUser.name %>'s Profile</h2>
 <h3>
-    Favorite Anime's Watched:
+    Favorite Animes Watched:
 </h3>
 
 <%if(results === undefined) {%>
@@ -13,6 +13,9 @@
                     <%=result.name%>
                 </a>
             </li>
+            <form action="/faves/anime/<%=result.animeId%>?_method=DELETE" method="POST">
+                <button type="submit">Remove from favorites</button>
+            </form>
             <%})%>
     </ul>
 <%}%> 
@@ -31,6 +34,9 @@ Favorite Characters:
                     <%=result.name%>
                 </a>
             </li>
+            <form action="/faves/character/<%=result.mal_id%>?_method=DELETE" method="POST">
+                <button type="submit">Remove from favorites</button>
+            </form>
             <%})%>
     </ul>
 <%}%>
