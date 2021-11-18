@@ -1,4 +1,15 @@
 <h2><%= currentUser.name %>'s Profile</h2>
+
+
+<h3>
+    About Me: <br>
+    <form action="/aboutMe/update/<%= currentUser.id %>/?_method=PUT" method="POST">
+    <input type="text" name="aboutMe" id="aboutMe" value="<%= aboutMe || "" %>">
+    <button type="submit">Update</button>
+    </form>
+</h3>
+
+
 <h3>
     Favorite Animes Watched:
 </h3>

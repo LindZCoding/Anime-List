@@ -50,6 +50,7 @@ app.use('/anime', require('./controllers/anime'))
 app.use('/character', require('./controllers/character'))
 app.use('/faves', require('./controllers/faveAnime'))
 app.use('/characterFaves', require('./controllers/faveCharacter'))
+app.use('/aboutMe', require('./controllers/aboutMe'))
 
 
 
@@ -64,27 +65,38 @@ app.get('/', (req, res) => {
 })
 
 // profile route
-app.get('/profile', isLoggedIn, (req, res) => {
-    db.favoriteAnime.findAll({
+app.get('/profile', isLoggedIn, async (req, res) => {
+    res.locals.currentUser = req.user;
+    console.log("this should be req user", req.user)
+    db.aboutMe.findOne({
         where: {
             userId: res.locals.currentUser.id
         }
     })
-        .then(faves => {
-            console.log("faves!!!!!!!!!!!", faves)
-            db.favoriteCharacter.findAll({
-                where: {
-                    userId: res.locals.currentUser.id
-                }
-            })
-                .then(charFaves => {
-                    console.log(charFaves)
-                    res.render("profile", { characterResults: charFaves, results: faves })
+    .then(aboutMeText => {
+        console.log("ABOUT ME TEXT:", aboutMeText)
+        db.favoriteAnime.findAll({
+            where: {
+                userId: res.locals.currentUser.id
+            }
+        })
+            .then(faves => {
+                // console.log("faves!!!!!!!!!!!", faves)
+                db.favoriteCharacter.findAll({
+                    where: {
+                        userId: res.locals.currentUser.id
+                    }
                 })
-        })
-        .catch(error => {
-            console.log(error)
-        })
+                    .then(charFaves => {
+                        console.log(charFaves)
+                        res.render("profile", { characterResults: charFaves, results: faves, aboutMe: aboutMeText?.personalText || "" })
+                    })
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    })
+    
 })
 
 // anime route
