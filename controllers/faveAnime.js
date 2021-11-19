@@ -51,7 +51,7 @@ router.post("/:deleteType/:mal_id", (req, res) => {
     console.log("this is the id i want to delete", req.params.mal_id)
     if(req.params.deleteType === "anime") {
         db.favoriteAnime.destroy({
-            where: { animeId: req.params.mal_id }
+            where: { animeId: req.params.mal_id, userId: res.locals.currentUser.id }
         })
         .then(deletedItem => {
             // Destroy returns "1" if smting is deleted and "0" if nothing deleted
@@ -63,7 +63,7 @@ router.post("/:deleteType/:mal_id", (req, res) => {
         })
     } else if(req.params.deleteType === "character"){
         db.favoriteCharacter.destroy({
-            where: { mal_id: req.params.mal_id }
+            where: { mal_id: req.params.mal_id, userId: res.locals.currentUser.id }
         })
         .then(deletedItem => {
             // Destroy returns "1" if smting is deleted and "0" if nothing deleted
@@ -75,7 +75,7 @@ router.post("/:deleteType/:mal_id", (req, res) => {
         })
     } else if(req.params.deleteType === "planToWatch"){
         db.planToWatch.destroy({
-            where: { animeId: req.params.mal_id }
+            where: { animeId: req.params.mal_id, userId: res.locals.currentUser.id }
         })
         .then(deletedItem => {
             // Destroy returns "1" if smting is deleted and "0" if nothing deleted
