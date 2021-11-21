@@ -21,6 +21,7 @@ app.use(ejsLayouts)
 
 // body parser middelware
 app.use(express.urlencoded({ extended: false }))
+app.use('/static', express.static('public'))
 
 // session middleware
 app.use(session({
@@ -97,7 +98,7 @@ app.get('/profile', isLoggedIn, async (req, res) => {
                             }
                         })
                         .then(planFaves => {
-                            res.render("profile", { characterResults: charFaves, results: faves, planToWatchResults: planFaves, aboutMe: aboutMeText?.personalText || "" })
+                            res.render("profile", { characterResults: charFaves, results: faves, planToWatchResults: planFaves, aboutMe: aboutMeText.personalText})
                         })
                     })
             })

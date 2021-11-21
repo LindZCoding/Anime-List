@@ -45,7 +45,9 @@
     
 <%} else {%>
     <%voice_actors.forEach(function(voiceActor) {%>
-        <img width="100" height="150" src="<%= voiceActor.image_url %>" class="card-img-top" alt="voice actor image"> <br>
+        <div class="card" style="width: 18rem;">
+        <img src="<%= voiceActor.image_url %>" alt="voice actor image"> 
+        </div>
         <h4>
             Voice actor: <%= voiceActor.name %>
         </h4> 

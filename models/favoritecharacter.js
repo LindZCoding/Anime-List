@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   favoriteCharacter.init({
     name: DataTypes.STRING,
     image_url: DataTypes.STRING,
-    about: DataTypes.STRING(1500),
+    about: DataTypes.STRING(4000),
     nicknames: DataTypes.STRING,
     voice_actors: DataTypes.STRING,
     animeName: DataTypes.STRING,

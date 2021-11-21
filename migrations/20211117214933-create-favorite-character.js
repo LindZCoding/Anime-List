@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       about: {
-        type: Sequelize.STRING(1500)
+        type: Sequelize.STRING(4000)
       },
       nicknames: {
         type: Sequelize.STRING

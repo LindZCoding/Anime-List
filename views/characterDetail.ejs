@@ -40,7 +40,7 @@
     <input hidden type="text" name="voice_actors" value="<%= voice_actors %>" >
     <input hidden type="text" name="nicknames" value="<%= nicknames %>" >
     <input hidden type="text" name="about" value="<%= about %>" >
-    <button type="submit">Add to your favorites</button>
+    <button type="submit" class="btn btn-info">Add to your favorites</button>
 </form>
 
 <%if(about === undefined) {%>
@@ -56,7 +56,7 @@
     
 <%} else {%>
     <%voice_actors.forEach(function(voiceActor) {%>
-        <img width="100" height="150" src="<%= voiceActor.image_url %>" class="card-img-top" alt="voice actor image"> <br>
+        <img  src="<%= voiceActor.image_url %>" alt="voice actor image"> <br>
         <h4>
             Voice actor: <%= voiceActor.name %>
         </h4> 
