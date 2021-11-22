@@ -1,0 +1,43 @@
+body {
+    background-color: rgb(239, 231, 246);
+    text-align: center;
+}
+
+a:hover {
+    color: rgb(138, 232, 255) !important;
+}
+
+#removeAnime {
+    margin-left: 15px !important;
+}
+
+#aboutMeCenter {
+    text-align: center !important;
+}
+
+#faveAnimes {
+    text-align: center !important;
+}
+
+#aboutMePage {
+    text-align: center !important;
+}
+
+#charButton {
+    margin-left: 15px !important;
+}
+
+#planWatchButton {
+    margin-left: 15px !important;
+}
+
+
+#centerAnimes {
+    text-align: center !important;
+}
+
+p {
+    font-size: 20px;
+}
+
+

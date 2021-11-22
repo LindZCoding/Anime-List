@@ -98,7 +98,7 @@ app.get('/profile', isLoggedIn, async (req, res) => {
                             }
                         })
                         .then(planFaves => {
-                            res.render("profile", { characterResults: charFaves, results: faves, planToWatchResults: planFaves, aboutMe: aboutMeText.personalText})
+                            res.render("profile", { characterResults: charFaves, results: faves, planToWatchResults: planFaves, aboutMe: aboutMeText ? aboutMeText.personalText : ""})
                         })
                     })
             })

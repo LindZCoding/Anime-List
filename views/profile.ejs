@@ -1,75 +1,97 @@
-<h2><%= currentUser.name %>'s Profile</h2>
+<div id="aboutMeCenter">
+    <h2>
+        <%= currentUser.name %>'s Profile
+    </h2>
 
-
-<h3>
-    About Me: <br>
-</h3>
-    <p><%= aboutMe %> </p>
+    <h3>
+        About Me: <br>
+    </h3>
+    <p>
+        <%= aboutMe %>
+    </p>
     <form action="/aboutMe/update/<%= currentUser.id %>/?_method=PUT" method="POST">
-    <input type="text" name="aboutMe" id="aboutMe">
-    <button type="submit" class="btn btn-info">Update</button>
+        <input type="text" name="aboutMe" id="aboutMe" required>
+        <button type="submit" class="btn btn-dark"><i class="bi bi-pencil"></i></button>
     </form>
-    
-<h3>
-    Favorite Animes Watched:
-</h3>
+</div>
+<br><br>
+<div id="aboutMePage"></div>
+<div id="favAnimes">
+    <h3>
+        Favorite Animes Watched:
+    </h3>
+    <%if(results===undefined) {%>
+        <h3>No Favorites Found</h3>
+        <%} else {%>
+            <div class="animeListFave">
+            <ul>
+                <%results.forEach(function(result) {%>
+                    <div id="centerAnimes">
+                    
+                        <form style="margin: 0; padding: 0;" action="/faves/anime/<%=result.animeId%>?_method=DELETE"
+                            method="POST">
+                            <a href="/anime/<%=result.animeId%>"
+                                style="text-decoration: none; color: rgb(121, 4, 255); font-weight: bolder; font-size: 20px">
+                                <%=result.name%>
+                            </a> <button id="removeAnime" type="submit" class="btn btn-outline-danger btn-sm"><i
+                                    class="bi bi-xbox"></i></button>
+                        </form>
+                    
+                </div>
 
-<%if(results === undefined) {%>
+                    <%})%>
+            </ul>
+        </div>
+            <%}%>
+        
+</div>
+<br>
+<h3>
+    Favorite Characters:
+</h3>
+<%if(characterResults===undefined) {%>
     <h3>No Favorites Found</h3>
-<%} else {%>
-    <ul>
-        <%results.forEach(function(result) {%>
-            <li>
-                <a href="/anime/<%=result.animeId%>">
-                    <%=result.name%>
-                </a>
-            </li>
-            <form action="/faves/anime/<%=result.animeId%>?_method=DELETE" method="POST">
-                <button type="submit" class="btn btn-danger btn-sm">Remove</button>
-            </form>
-            <%})%>
-    </ul>
-<%}%> 
-<br> <br>
+    <%} else {%>
+        <ul>
+            <%characterResults.forEach(function(result) {%>
+            
+                    <form style="margin: 0; padding: 0;" action="/faves/character/<%=result.mal_id%>?_method=DELETE"
+                        method="POST"></form>
+                    <a href="/character/<%=result.mal_id%>"
+                        style="text-decoration: none; color: rgb(121, 4, 255); font-weight: bolder; font-size: 20px">
+                        <%=result.name%>
+                    </a>
+                    <button id="charButton" type="submit" class="btn btn-outline-danger btn-sm"><i
+                        class="bi bi-xbox"></i></button>
+                    </form>
+              
+                <%})%>
+        </ul>
+        <%}%>
+<br>
+            <h3>
+                Plan To Watch:
+            </h3>
 
-<h3>
-Favorite Characters:
-</h3>
-<%if(characterResults === undefined) {%>
-    <h3>No Favorites Found</h3>
-<%} else {%>
-    <ul>
-        <%characterResults.forEach(function(result) {%>
-            <li>
-                <a href="/character/<%=result.mal_id%>">
-                    <%=result.name%>
-                </a>
-            </li>
-            <form action="/faves/character/<%=result.mal_id%>?_method=DELETE" method="POST">
-                <button type="submit" class="btn btn-info btn-sm">Remove</button>
-            </form>
-            <%})%>
-    </ul>
-<%}%>
+            <%if(planToWatchResults===undefined) {%>
+                <h3>No plan to watch made</h3>
+                <%} else {%>
+                    <ul>
+                        <%planToWatchResults.forEach(function(result) {%>
+                       
+                                <form style="margin: 0; padding: 0;" action="/faves/planToWatch/<%=result.animeId%>?_method=DELETE" method="POST">
+                                <a href="/planToWatch/<%=result.animeId%>" style="text-decoration: none; color: rgb(121, 4, 255); font-weight: bolder; font-size: 20px;">
+                                    <%=result.name%>
+                                </a>
 
-<h3>
-    Plan To Watch:
-</h3>
+                                <button id="planWatchButton" type="submit" class="btn btn-outline-danger btn-sm"><i
+                                    class="bi bi-xbox"></i></button>
+                            </form>
+                       
+                            <%})%>
+                    </ul>
+                    <%}%>
+                        </div>
+                        <br> <br>
 
-<%if(planToWatchResults === undefined) {%>
-    <h3>No plan to watch made</h3>
-<%} else {%>
-    <ul>
-        <%planToWatchResults.forEach(function(result) {%>
-            <li>
-                <a href="/planToWatch/<%=result.animeId%>">
-                    <%=result.name%>
-                </a>
-            </li>
-            <form action="/faves/planToWatch/<%=result.animeId%>?_method=DELETE" method="POST">
-                <button type="submit" class="btn btn-info btn-sm">Remove</button>
-            </form>
-            <%})%>
-    </ul>
-<%}%> 
-<br> <br>
+                        <link rel="stylesheet" href="/static/css/profile.css">
